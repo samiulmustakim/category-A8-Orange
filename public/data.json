@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Complete Web Development Bootcamp",
+    "instructor": "John Doe",
+    "duration": "20 hours",
+    "rating": 4.8,
+    "level": "Beginner",
+    "description": "Learn full-stack web development from scratch.",
+    "image": "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg",
+    "category": "Development"
+  },
+  {
+    "id": 2,
+    "title": "React JS Mastery",
+    "instructor": "Jane Smith",
+    "duration": "15 hours",
+    "rating": 4.7,
+    "level": "Intermediate",
+    "description": "Master React.js with projects.",
+    "image": "https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg",
+    "category": "Development"
+  },
+  {
+    "id": 3,
+    "title": "Next.js Full Guide",
+    "instructor": "Michael Lee",
+    "duration": "12 hours",
+    "rating": 4.6,
+    "level": "Intermediate",
+    "description": "Build apps with Next.js.",
+    "image": "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg",
+    "category": "Development"
+  },
+  {
+    "id": 4,
+    "title": "Python for Beginners",
+    "instructor": "Sarah Khan",
+    "duration": "18 hours",
+    "rating": 4.9,
+    "level": "Beginner",
+    "description": "Start coding with Python.",
+    "image": "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg",
+    "category": "Programming"
+  },
+  {
+    "id": 5,
+    "title": "Data Structures & Algorithms",
+    "instructor": "David Kim",
+    "duration": "25 hours",
+    "rating": 4.8,
+    "level": "Advanced",
+    "description": "Master DSA.",
+    "image": "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg",
+    "category": "Programming"
+  },
+  {
+    "id": 6,
+    "title": "UI/UX Design Fundamentals",
+    "instructor": "Emily Brown",
+    "duration": "10 hours",
+    "rating": 4.5,
+    "level": "Beginner",
+    "description": "Learn UI/UX.",
+    "image": "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
+    "category": "Design"
+  },
+  {
+    "id": 7,
+    "title": "Graphic Design Masterclass",
+    "instructor": "Alex Johnson",
+    "duration": "14 hours",
+    "rating": 4.6,
+    "level": "Intermediate",
+    "description": "Become a designer.",
+    "image": "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg",
+    "category": "Design"
+  },
+  {
+    "id": 8,
+    "title": "Digital Marketing A-Z",
+    "instructor": "Chris Evans",
+    "duration": "16 hours",
+    "rating": 4.7,
+    "level": "Beginner",
+    "description": "Learn marketing.",
+    "image": "https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg",
+    "category": "Marketing"
+  },
+  {
+    "id": 9,
+    "title": "SEO Mastery Course",
+    "instructor": "Sophia Lee",
+    "duration": "8 hours",
+    "rating": 4.4,
+    "level": "Intermediate",
+    "description": "SEO strategies.",
+    "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
+    "category": "Marketing"
+  },
+  {
+    "id": 10,
+    "title": "Freelancing for Beginners",
+    "instructor": "Mark Wilson",
+    "duration": "9 hours",
+    "rating": 4.6,
+    "level": "Beginner",
+    "description": "Earn online.",
+    "image": "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg",
+    "category": "Business"
+  },
+  {
+    "id": 11,
+    "title": "Machine Learning Basics",
+    "instructor": "Andrew Ng",
+    "duration": "22 hours",
+    "rating": 4.9,
+    "level": "Advanced",
+    "description": "Intro to ML.",
+    "image": "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg",
+    "category": "AI"
+  },
+  {
+    "id": 12,
+    "title": "Cyber Security Essentials",
+    "instructor": "Kevin Mitnick",
+    "duration": "11 hours",
+    "rating": 4.7,
+    "level": "Intermediate",
+    "description": "Security basics.",
+    "image": "https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg",
+    "category": "Security"
+  }
+]
