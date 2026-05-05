@@ -1,5 +1,4 @@
 "use client";
-import { inter } from "@/app/layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -7,7 +6,7 @@ import Mynavlink from "./Mynavlink";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "Courses", path: "/courses" },
+  { name: "Courses", path: "/all-courses" },
   { name: "My Profile", path: "/profile" },
 ];
 
@@ -15,7 +14,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className={`sticky top-0 z-50 backdrop-blur-md bg-white/70  ${inter.className}`}>
+    <nav className={`sticky top-0 z-50 backdrop-blur-md bg-white/70 shadow-lg`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
@@ -50,7 +49,7 @@ const Navbar = () => {
 
           <motion.div whileHover={{ scale: 1.05 }}>
             <Link
-              href="/register"
+              href="/registration"
               className="px-4 py-2 rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-md hover:shadow-lg transition-all duration-300"
             >
               Register
