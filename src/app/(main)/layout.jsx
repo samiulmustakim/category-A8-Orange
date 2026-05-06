@@ -5,11 +5,13 @@ import React from 'react';
 
 const MainLayout = ({children}) => {
     return (
-        <>
+        <div className='min-h-screen flex flex-col'>
             <Navbar></Navbar>
-            {children}
+            <main className='flex-1'>
+                {children}
+            </main>
             <Footer></Footer>
-        </>
+        </div>
     );
 };
 
