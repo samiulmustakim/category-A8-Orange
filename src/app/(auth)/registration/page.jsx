@@ -5,6 +5,7 @@ import { authClient } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
     const {
@@ -21,7 +22,13 @@ export default function RegisterPage() {
             image: data.photo,
             callbackURL: "/",
         });
-        console.log(res, error)
+        if (error) {
+            
+        }
+        if (res) {
+           toast("Register Sucessfull")
+       }
+
     };
 
     return (
