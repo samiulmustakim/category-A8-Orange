@@ -1,40 +1,55 @@
-
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm({ mode: "onBlur" });
 
     const handleRegisterSubmit = async (data) => {
+        setLoading(true);
+
         const { data: res, error } = await authClient.signUp.email({
-            name: data.name, // required
+            name: data.name,
             email: data.email,
             password: data.password,
             image: data.photo,
-            callbackURL: "/",
         });
-        if (error) {
-            
-        }
-        if (res) {
-           toast("Register Sucessfull")
-       }
 
+        if (error) {
+            toast.error(error.message);
+            setLoading(false);
+            return;
+        }
+
+        if (res) {
+            reset();
+            toast.success("Registration successful 🎉");
+            router.push("/"); 
+        }
+
+        setLoading(false);
     };
 
     return (
         <section className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-6">
             <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
-                {/* LEFT SIDE */}
+
+                {/* LEFT */}
                 <motion.div
                     initial={{ opacity: 0, x: -80 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -54,7 +69,7 @@ export default function RegisterPage() {
                     </p>
                 </motion.div>
 
-                {/* RIGHT FORM */}
+                {/* FORM */}
                 <motion.div
                     initial={{ opacity: 0, y: 60 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -66,173 +81,89 @@ export default function RegisterPage() {
                             Sign Up
                         </h2>
 
-                        <form
-                            onSubmit={handleSubmit(handleRegisterSubmit)}
-                            className="space-y-5"
-                        >
+                        <form onSubmit={handleSubmit(handleRegisterSubmit)} className="space-y-5">
+
                             {/* NAME */}
                             <div>
-                                <label className="text-sm text-gray-500">
-                                    Name
-                                </label>
                                 <input
                                     type="text"
-                                    placeholder="Enter your name"
-                                    className={`mt-1 w-full px-4 py-3 rounded-xl 
-                  bg-white/70 text-gray-700 placeholder-gray-400
-                  caret-blue-500 border border-transparent
-                  focus:outline-none transition
-                  ${
-                      errors.name
-                          ? "ring-2 ring-red-300"
-                          : "focus:ring-2 focus:ring-blue-300"
-                  }`}
-                                    {...register("name", {
-                                        required: "Name is required",
-                                    })}
+                                    placeholder="Your Name"
+                                    className={`mt-1 w-full px-4 py-3 rounded-xl bg-white/70 text-gray-700 placeholder-gray-400 caret-blue-500 border border-transparent focus:outline-none transition ${
+                                        errors.name ? "ring-2 ring-red-300" : "focus:ring-2 focus:ring-blue-300"
+                                    }`}
+                                    {...register("name", { required: "Name is required" })}
                                 />
-
                                 {errors.name && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -6 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm 
-                    bg-gradient-to-r from-red-100 to-pink-100 
-                    text-red-600 shadow-sm"
-                                    >
-                                        ⚠ {errors.name.message}
-                                    </motion.p>
+                                    <p className="mt-2 text-sm text-red-500">⚠ {errors.name.message}</p>
                                 )}
                             </div>
 
                             {/* EMAIL */}
                             <div>
-                                <label className="text-sm text-gray-500">
-                                    Email
-                                </label>
                                 <input
                                     type="email"
-                                    placeholder="Enter your email"
-                                    className={`mt-1 w-full px-4 py-3 rounded-xl 
-                  bg-white/70 text-gray-700 placeholder-gray-400
-                  caret-blue-500 border border-transparent
-                  focus:outline-none transition
-                  ${
-                      errors.email
-                          ? "ring-2 ring-red-300"
-                          : "focus:ring-2 focus:ring-blue-300"
-                  }`}
-                                    {...register("email", {
-                                        required: "Email is required",
-                                    })}
+                                    placeholder="Email"
+                                    className={`mt-1 w-full px-4 py-3 rounded-xl bg-white/70 text-gray-700 placeholder-gray-400 caret-blue-500 border border-transparent focus:outline-none transition ${
+                                        errors.email ? "ring-2 ring-red-300" : "focus:ring-2 focus:ring-blue-300"
+                                    }`}
+                                    {...register("email", { required: "Email is required" })}
                                 />
-
                                 {errors.email && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -6 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-pink-100 
-                    text-red-600 shadow-sm"
-                                    >
-                                        ⚠ {errors.email.message}
-                                    </motion.p>
+                                    <p className="mt-2 text-sm text-red-500">⚠ {errors.email.message}</p>
                                 )}
                             </div>
 
-                            {/* PHOTO URL */}
+                            {/* PHOTO */}
                             <div>
-                                <label className="text-sm text-gray-500">
-                                    Photo URL
-                                </label>
                                 <input
                                     type="text"
-                                    placeholder="Paste image link"
-                                    className={`mt-1 w-full px-4 py-3 rounded-xl 
-                  bg-white/70 text-gray-700 placeholder-gray-400
-                  caret-purple-500 border border-transparent
-                  focus:outline-none transition
-                  ${
-                      errors.photo
-                          ? "ring-2 ring-red-300"
-                          : "focus:ring-2 focus:ring-purple-300"
-                  }`}
-                                    {...register("photo", {
-                                        required: "Photo URL is required",
-                                    })}
+                                    placeholder="Photo URL"
+                                    className={`mt-1 w-full px-4 py-3 rounded-xl bg-white/70 text-gray-700 placeholder-gray-400 caret-purple-500 border border-transparent focus:outline-none transition ${
+                                        errors.photo ? "ring-2 ring-red-300" : "focus:ring-2 focus:ring-purple-300"
+                                    }`}
+                                    {...register("photo", { required: "Photo URL is required" })}
                                 />
-
                                 {errors.photo && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -6 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-orange-100 
-                    text-red-600 shadow-sm"
-                                    >
-                                        ⚠ {errors.photo.message}
-                                    </motion.p>
+                                    <p className="mt-2 text-sm text-red-500">⚠ {errors.photo.message}</p>
                                 )}
                             </div>
 
                             {/* PASSWORD */}
                             <div>
-                                <label className="text-sm text-gray-500">
-                                    Password
-                                </label>
                                 <input
                                     type="password"
-                                    placeholder="Create password"
-                                    className={`mt-1 w-full px-4 py-3 rounded-xl 
-                  bg-white/70 text-gray-700 placeholder-gray-400
-                  caret-purple-500 border border-transparent
-                  focus:outline-none transition
-                  ${
-                      errors.password
-                          ? "ring-2 ring-red-300"
-                          : "focus:ring-2 focus:ring-purple-300"
-                  }`}
+                                    placeholder="Password"
+                                    className={`mt-1 w-full px-4 py-3 rounded-xl bg-white/70 text-gray-700 placeholder-gray-400 caret-purple-500 border border-transparent focus:outline-none transition ${
+                                        errors.password ? "ring-2 ring-red-300" : "focus:ring-2 focus:ring-purple-300"
+                                    }`}
                                     {...register("password", {
                                         required: "Password is required",
                                         minLength: {
                                             value: 6,
-                                            message:
-                                                "Minimum 6 characters required",
+                                            message: "Minimum 6 characters required",
                                         },
                                     })}
                                 />
-
                                 {errors.password && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -6 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-orange-100 text-red-600 shadow-sm"
-                                    >
-                                        ⚠ {errors.password.message}
-                                    </motion.p>
+                                    <p className="mt-2 text-sm text-red-500">⚠ {errors.password.message}</p>
                                 )}
                             </div>
 
                             {/* BUTTON */}
                             <motion.button
                                 type="submit"
-                                whileHover={{
-                                    scale: 1.05,
-                                    boxShadow:
-                                        "0px 10px 25px rgba(99,102,241,0.3)",
-                                }}
+                                disabled={loading}
+                                whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold"
+                                className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold disabled:opacity-70"
                             >
-                                Register 🚀
+                                {loading ? "Registering..." : "Register 🚀"}
                             </motion.button>
                         </form>
 
-                        {/* LOGIN LINK */}
                         <p className="text-center text-sm text-gray-500 mt-5">
                             Already have an account?{" "}
-                            <Link
-                                href="/login"
-                                className="text-blue-500 font-medium hover:underline"
-                            >
+                            <Link href="/login" className="text-blue-500 font-medium hover:underline">
                                 Login
                             </Link>
                         </p>

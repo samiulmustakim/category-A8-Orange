@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
@@ -15,6 +16,12 @@ export default function LoginPage() {
         handleSubmit,
         formState: { errors },
     } = useForm({ mode: "onBlur" });
+
+    const handleGoogleSignUp = async () => {
+        await authClient.signIn.social({
+            provider: "google",
+        });
+    };
 
     const handleLoginSubmit = async (formData) => {
         setLoading(true);
@@ -42,7 +49,6 @@ export default function LoginPage() {
     return (
         <section className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-6">
             <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
-
                 {/* LEFT */}
                 <motion.div
                     initial={{ opacity: 0, x: -80 }}
@@ -79,10 +85,11 @@ export default function LoginPage() {
                             onSubmit={handleSubmit(handleLoginSubmit)}
                             className="space-y-5"
                         >
-
                             {/* EMAIL */}
                             <div>
-                                <label className="text-sm text-gray-500">Email</label>
+                                <label className="text-sm text-gray-500">
+                                    Email
+                                </label>
 
                                 <input
                                     type="email"
@@ -116,7 +123,9 @@ export default function LoginPage() {
 
                             {/* PASSWORD */}
                             <div>
-                                <label className="text-sm text-gray-500">Password</label>
+                                <label className="text-sm text-gray-500">
+                                    Password
+                                </label>
 
                                 <input
                                     type="password"
@@ -134,7 +143,8 @@ export default function LoginPage() {
                                         required: "Password is required",
                                         minLength: {
                                             value: 6,
-                                            message: "Password must be at least 6 characters",
+                                            message:
+                                                "Password must be at least 6 characters",
                                         },
                                     })}
                                 />
@@ -144,8 +154,7 @@ export default function LoginPage() {
                                         initial={{ opacity: 0, y: -6 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         className="mt-2 px-3 py-2 rounded-lg text-sm 
-                                        bg-gradient-to-r from-red-100 to-orange-100 
-                                        text-red-600 shadow-sm"
+                                        bg-gradient-to-r from-red-100 to-orange-100 text-red-600 shadow-sm"
                                     >
                                         ⚠ {errors.password.message}
                                     </motion.p>
@@ -155,11 +164,17 @@ export default function LoginPage() {
                             {/* OPTIONS */}
                             <div className="flex justify-between items-center text-sm text-gray-500">
                                 <label className="flex items-center gap-2">
-                                    <input type="checkbox" className="accent-purple-500" />
+                                    <input
+                                        type="checkbox"
+                                        className="accent-purple-500"
+                                    />
                                     Remember me
                                 </label>
 
-                                <Link href="#" className="hover:text-blue-500 transition">
+                                <Link
+                                    href="#"
+                                    className="hover:text-blue-500 transition"
+                                >
                                     Forgot password?
                                 </Link>
                             </div>
@@ -173,6 +188,28 @@ export default function LoginPage() {
                                 className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold disabled:opacity-70"
                             >
                                 {loading ? "Logging in..." : "Login 🚀"}
+                            </motion.button>
+
+                            {/* 🔥 GOOGLE BUTTON (JUST ADDED) */}
+                            <motion.button
+                                onClick={handleGoogleSignUp}
+                                type="button"
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                                className="w-full py-3 rounded-xl 
+                                bg-white/80 border border-gray-200
+                                flex items-center justify-center gap-3
+                                text-gray-700 font-medium
+                                shadow-sm hover:shadow-md transition"
+                            >
+                                <Image
+                                    src="https://www.svgrepo.com/show/475656/google-color.svg"
+                                    alt="google"
+                                    className="w-5 h-5"
+                                    width={100}
+                                    height={100}
+                                />
+                                Continue with Google
                             </motion.button>
                         </form>
 

@@ -1,6 +1,9 @@
 import React from 'react';
 
-const page = () => {
+const ProfilePage = () => {
+    const { data: userData } = authClient.useSession();
+    const user = userData?.user;
+    
     return (
         <div>
             
@@ -8,4 +11,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default ProfilePage;
