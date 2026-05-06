@@ -1,5 +1,7 @@
-"use client";
 
+"use client"
+
+import { authClient } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -11,8 +13,15 @@ export default function RegisterPage() {
         formState: { errors },
     } = useForm({ mode: "onBlur" });
 
-    const handleRegisterSubmit = (data) => {
-        console.log(data);
+    const handleRegisterSubmit = async (data) => {
+        const { data: res, error } = await authClient.signUp.email({
+            name: data.name, // required
+            email: data.email,
+            password: data.password,
+            image: data.photo,
+            callbackURL: "/",
+        });
+        console.log(res, error)
     };
 
     return (
@@ -115,8 +124,7 @@ export default function RegisterPage() {
                                     <motion.p
                                         initial={{ opacity: 0, y: -6 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm 
-                    bg-gradient-to-r from-red-100 to-pink-100 
+                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-pink-100 
                     text-red-600 shadow-sm"
                                     >
                                         ⚠ {errors.email.message}
@@ -150,8 +158,7 @@ export default function RegisterPage() {
                                     <motion.p
                                         initial={{ opacity: 0, y: -6 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm 
-                    bg-gradient-to-r from-red-100 to-orange-100 
+                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-orange-100 
                     text-red-600 shadow-sm"
                                     >
                                         ⚠ {errors.photo.message}
@@ -190,9 +197,7 @@ export default function RegisterPage() {
                                     <motion.p
                                         initial={{ opacity: 0, y: -6 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm 
-                    bg-gradient-to-r from-red-100 to-orange-100 
-                    text-red-600 shadow-sm"
+                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-orange-100 text-red-600 shadow-sm"
                                     >
                                         ⚠ {errors.password.message}
                                     </motion.p>
@@ -208,9 +213,7 @@ export default function RegisterPage() {
                                         "0px 10px 25px rgba(99,102,241,0.3)",
                                 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="w-full py-3 rounded-xl 
-                bg-gradient-to-r from-blue-500 to-purple-500 
-                text-white font-semibold"
+                                className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold"
                             >
                                 Register 🚀
                             </motion.button>

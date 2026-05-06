@@ -1,7 +1,5 @@
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
-import Navber from "@/shared/Navber";
-import Footer from "@/shared/Footer";
 import { inter, poppins } from "@/lib/font";
 
 export const metadata = {
