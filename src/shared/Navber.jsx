@@ -14,6 +14,15 @@ const navLinks = [
     { name: "My Profile", path: "/profile" },
 ];
 
+const isValidUrl = (str) => {
+    try {
+        new URL(str);
+        return true;
+    } catch {
+        return false;
+    }
+};
+
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const router = useRouter();
@@ -25,7 +34,7 @@ const Navbar = () => {
         await authClient.signOut({
             fetchOptions: {
                 onSuccess: () => {
-                    toast.success("Logout successful 👋")
+                    toast.success("Logout successful 👋");
                     router.push("/login");
                 },
             },
@@ -35,6 +44,7 @@ const Navbar = () => {
     return (
         <nav className="sticky top-0 z-50 backdrop-blur-md bg-white/70 shadow-lg">
             <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
                 {/* LOGO */}
                 <motion.div
                     initial={{ opacity: 0, y: -15 }}
@@ -48,7 +58,9 @@ const Navbar = () => {
                 <div className="hidden md:flex gap-6 items-center">
                     {navLinks.map((link, i) => (
                         <motion.div key={i} whileHover={{ y: -2 }}>
-                            <Mynavlink href={link.path}>{link.name}</Mynavlink>
+                            <Mynavlink href={link.path}>
+                                {link.name}
+                            </Mynavlink>
                         </motion.div>
                     ))}
                 </div>
@@ -63,7 +75,6 @@ const Navbar = () => {
                             >
                                 Login
                             </Link>
-
                             <Link
                                 href="/registration"
                                 className="px-4 py-2 rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600"
@@ -73,9 +84,8 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            {/* USER IMAGE */}
-                            <div className="w-10 h-10 mask mask-squircle">
-                                {user?.image ? (
+                            <div className="w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
+                                {user?.image && isValidUrl(user.image) ? (
                                     <Image
                                         src={user.image}
                                         alt={user?.name || "User"}
@@ -84,16 +94,12 @@ const Navbar = () => {
                                         className="w-full h-full object-cover"
                                     />
                                 ) : (
-                                    (
-                                        user?.name?.[0] || user?.email?.[0]
-                                    ).toUpperCase()
+                                    user?.name?.[0]?.toUpperCase() || "U"
                                 )}
                             </div>
-
-                            {/* SIGN OUT */}
                             <button
                                 onClick={handleLogout}
-                                className="px-4 py-2 rounded-lg bg-red-500 text-white"
+                                className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
                             >
                                 Sign Out
                             </button>
@@ -112,26 +118,17 @@ const Navbar = () => {
             {/* MOBILE MENU */}
             <motion.div
                 initial={{ height: 0, opacity: 0 }}
-                animate={{
-                    height: open ? "auto" : 0,
-                    opacity: open ? 1 : 0,
-                }}
+                animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden md:hidden bg-white/90 backdrop-blur-md"
             >
                 <div className="px-6 pb-4 space-y-4 pt-3">
-                    {/* NAV LINKS */}
                     {navLinks.map((link, i) => (
-                        <Mynavlink
-                            key={i}
-                            href={link.path}
-                            onClick={() => setOpen(false)}
-                        >
+                        <Mynavlink key={i} href={link.path} onClick={() => setOpen(false)}>
                             {link.name}
                         </Mynavlink>
                     ))}
 
-                    {/* AUTH SECTION */}
                     <div className="flex flex-col gap-3 pt-3">
                         {!user ? (
                             <>
@@ -142,7 +139,6 @@ const Navbar = () => {
                                 >
                                     Login
                                 </Link>
-
                                 <Link
                                     href="/registration"
                                     onClick={() => setOpen(false)}
@@ -153,30 +149,25 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                {/* USER INFO */}
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl overflow-hidden ">
-                                        <Image
-                                            src={user?.image}
-                                            alt={user?.name || "User"}
-                                            width={40}
-                                            height={40}
-                                            className="w-full h-full object-cover"
-                                        />
+                                    <div className="w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
+                                        {user?.image && isValidUrl(user.image) ? (
+                                            <Image
+                                                src={user.image}
+                                                alt={user?.name || "User"}
+                                                width={40}
+                                                height={40}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            user?.name?.[0]?.toUpperCase() || "U"
+                                        )}
                                     </div>
-
-                                    <span className="text-gray-700 font-medium">
-                                        {user?.name}
-                                    </span>
+                                    <span className="text-gray-700 font-medium">{user?.name}</span>
                                 </div>
-
-                                {/* LOGOUT */}
                                 <button
-                                    onClick={() => {
-                                        handleLogout();
-                                        setOpen(false);
-                                    }}
-                                    className="px-4 py-2 bg-red-500 text-white rounded-lg text-center"
+                                    onClick={() => { handleLogout(); setOpen(false); }}
+                                    className="px-4 py-2 bg-red-500 text-white rounded-lg text-center hover:bg-red-600 transition"
                                 >
                                     Sign Out
                                 </button>

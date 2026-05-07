@@ -112,9 +112,7 @@ export default function LoginPage() {
                                     <motion.p
                                         initial={{ opacity: 0, y: -6 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm 
-                                        bg-gradient-to-r from-red-100 to-pink-100 
-                                        text-red-600 shadow-sm"
+                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-pink-100 text-red-600 shadow-sm"
                                     >
                                         ⚠ {errors.email.message}
                                     </motion.p>
@@ -153,8 +151,7 @@ export default function LoginPage() {
                                     <motion.p
                                         initial={{ opacity: 0, y: -6 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mt-2 px-3 py-2 rounded-lg text-sm 
-                                        bg-gradient-to-r from-red-100 to-orange-100 text-red-600 shadow-sm"
+                                        className="mt-2 px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-red-100 to-orange-100 text-red-600 shadow-sm"
                                     >
                                         ⚠ {errors.password.message}
                                     </motion.p>

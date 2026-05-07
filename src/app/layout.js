@@ -1,3 +1,5 @@
+// import dns from "node:dns";
+// dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import { inter, poppins } from "@/lib/font";
