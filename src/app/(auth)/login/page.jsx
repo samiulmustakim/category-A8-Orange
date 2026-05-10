@@ -193,11 +193,7 @@ export default function LoginPage() {
                                 type="button"
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
-                                className="w-full py-3 rounded-xl 
-                                bg-white/80 border border-gray-200
-                                flex items-center justify-center gap-3
-                                text-gray-700 font-medium
-                                shadow-sm hover:shadow-md transition"
+                                className="w-full py-3 rounded-xl bg-white/80 border border-gray-200 flex items-center justify-center gap-3 text-gray-700 font-medium shadow-sm hover:shadow-md transition"
                             >
                                 <Image
                                     src="https://www.svgrepo.com/show/475656/google-color.svg"

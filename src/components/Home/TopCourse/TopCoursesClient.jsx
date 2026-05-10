@@ -24,7 +24,7 @@ const card = {
 
 export default function TopCoursesClient({ courses }) {
     return (
-        <section className="py-20 bg-gradient-to-b from-white to-blue-50">
+        <section className="py-20 bg-linear-to-b from-white to-blue-50">
             {/* Title */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -86,17 +86,15 @@ export default function TopCoursesClient({ courses }) {
                             </div>
 
                             <Link href={`/all-courses/${course.id}`}>
-                                <motion.div
+                                <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="mt-4 w-full py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center cursor-pointer"
+                                    className="mt-4 w-full py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white cursor-pointer"
                                 >
                                     View Details →
-                                </motion.div>
+                                </motion.button>
                             </Link>
                         </div>
-
-                        <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-blue-400" />
                     </motion.div>
                 ))}
             </motion.div>

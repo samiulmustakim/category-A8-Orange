@@ -1,4 +1,5 @@
 import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
@@ -17,8 +18,8 @@ export const auth = betterAuth({
   },
     socialProviders: {
         google: { 
-            clientId: process.env.GOOGLE_CLINET_ID ,
-            clientSecret: process.env.GOGGLE_CLINET_SECRET
+            clientId: process.env.GOOGLE_CLIENT_ID ,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
         }, 
     }
 });
